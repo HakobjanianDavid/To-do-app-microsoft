@@ -1,0 +1,42 @@
+<div class="openMenu">
+    <div class="openMenuWrapper" (click) = openLeftMenu($event.target)>
+        <img class="openMenuImg" src="../../assets/images/leftBarSide/openMenu.svg" alt="">
+    </div>
+</div>
+<div class="features">
+    <div class="iconsWrapper"> 
+        <img src="../../assets/images/leftBarSide/sunIcon.svg" alt="">
+        <div class="iconNote">
+            <span>Мой день</span>
+        </div>
+    </div>
+    <div class="iconsWrapper"> 
+        <img src="../../assets/images/leftBarSide/starIcon.svg" alt="">
+        <div class="iconNote" #iconNote>
+            <span>Важно</span>
+        </div>
+    </div>
+    <div class="iconsWrapper"> 
+        <img src="../../assets/images/leftBarSide/calendar.svg" alt="">
+        <div class="iconNote" #iconNote>
+            <span>Запланировано</span>
+        </div>    
+    </div>
+    <div class="iconsWrapper"> 
+        <img src="../../assets/images/leftBarSide/userIcon.svg" alt="">
+        <div class="iconNote" #iconNote>
+            <span>Назначенные вам</span>
+        </div>
+    </div>
+    <div class="iconsWrapper"> 
+        <img src="../../assets/images/leftBarSide/homeIcon.svg" alt="">
+        <div class="iconNote" #iconNote>
+            <span>Задачи</span>
+        </div>
+    </div>
+
+    <div class="iconsWrapper" (click)=openLeftMenu($event.target)> 
+        <img class="plusIcon" src="../../assets/images/leftBarSide/plusIcon.svg" alt="">
+        <input #addNewListInput class="featuresInput iconNote" type="text" placeholder="Создать список">
+    </div>
+</div>

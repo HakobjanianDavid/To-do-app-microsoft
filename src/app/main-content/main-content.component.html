@@ -1,0 +1,11 @@
+<app-left-menu #leftMenu class="leftSide" 
+    [ngClass] = "{
+        'openLeftMenu': changeWidth,
+        'closeLeftMenu': !changeWidth
+    }" 
+    (changeMenuSize) = changeSize($event)
+    >
+</app-left-menu>
+<app-tasks class="rigthSide">
+
+</app-tasks>

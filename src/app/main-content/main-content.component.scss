@@ -1,0 +1,23 @@
+.leftSide {
+    width: 60px;
+    background-color: rgb(244,244,244);
+
+    position: relative;
+}
+
+
+.openLeftMenu {
+    width: 300px;
+    display: flex;
+    
+    flex-direction: column;
+    align-items: flex-start;
+    
+    transition: ease;
+    transition-duration: 0.3s;
+}
+
+.closeLeftMenu {
+    transition: ease;
+    transition-duration: 0.3s;
+}

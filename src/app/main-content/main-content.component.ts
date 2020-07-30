@@ -26,11 +26,6 @@ export class MainContentComponent implements OnInit {
         this.changeWidth = false;
         this.flag = !this.flag;
       }
-
-      // if(element.classList.contains('iconsWrapper') || 
-      // element.classList.contains('plusIcon')) {
-
-      // }
     }
   }
 

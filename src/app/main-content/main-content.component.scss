@@ -1,10 +1,18 @@
+.navHeader {
+    display: flex;
+    height: 48px;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: rgb(0,120,215);
+}
+
 .leftSide {
     width: 60px;
     background-color: rgb(244,244,244);
 
     position: relative;
 }
-
 
 .openLeftMenu {
     width: 300px;

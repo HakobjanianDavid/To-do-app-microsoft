@@ -39,7 +39,7 @@
     
     .iconsWrapper {
         display: flex;
-
+        outline: none;
         position: relative;
         
         height: 40px;
@@ -53,10 +53,9 @@
         
         &:hover {
             cursor: pointer;
-            background-color: lighten($color: rgb(244, 244, 244), $amount: 5) 
+            background-color: lighten($color: rgb(244, 244, 244), $amount: 5);
         }
 
-        
         img {
             width: 23px;
             position: absolute;
@@ -84,4 +83,9 @@
             background-color: inherit;
         }
     }
+}
+
+.active {
+    outline: none;
+    background-color: darken($color: rgb(244, 244, 244), $amount: 5);
 }

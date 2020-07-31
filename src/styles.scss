@@ -2,4 +2,21 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+app-inbox {
+    flex: 1 1 0px;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    margin-left: 24px;
+}
+
+app-myday {
+    flex: 1 1 0px;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    margin-left: 24px;
 }

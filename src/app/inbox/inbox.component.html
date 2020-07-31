@@ -1,1 +1,34 @@
-<p>inbox works!</p>
+
+<div class="inboxTitle" (click) = addTask()>
+    <span class="inboxTitle__header">Задачи</span>
+    <div class="inboxTitle__sortBox"></div>
+</div>
+<div class="taskInputWrapper" #taskInputWrapper>
+    <div class="taskInputAddIcon" (click) = focusToInput($event) #addIconWrapper>
+        <img src="../../assets/images/leftBarSide/plusIcon.svg" alt="plus" class="taskInputAddIcon__Img" #addIcon>
+    </div>
+    
+    <input type="text" placeholder="Добавить задачу"
+    class="taskInputWrapper__inputField"
+    (click) = focusToInput($event)
+    (keydown.enter) = addTask()
+    #tasksInput [(ngModel)]="taskInput">
+    
+    <button *ngIf="tasksInput.value"
+    class="taskInputWrapper__addBtn"
+    (click) = addTask()
+    >
+        Добавить
+    </button>
+</div>
+
+<div class="tasks" (click) = addTask()>
+    <div class="taskItem"
+        *ngFor="let task of tasks"
+    >
+        <div class="taskItem__circle"></div>
+        <span class="taskItem__title">
+            {{ task }}
+        </span>
+    </div>
+</div>

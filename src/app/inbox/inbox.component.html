@@ -24,11 +24,30 @@
 
 <div class="tasks" (click) = addTask()>
     <div class="taskItem"
-        *ngFor="let task of tasks"
+        *ngFor="let task of tasks; let i=index"
     >
-        <div class="taskItem__circle"></div>
+        <div class="taskItem__circle" (click) = "addInComplitedTask(task, i)"></div>
         <span class="taskItem__title">
             {{ task }}
         </span>
+    </div>
+
+
+    <div class="" *ngIf="complitedTasks.length">
+        <div class="taskItem">
+            <div class="taskItem__circle"></div>
+            <span class="taskItem__title">
+                Завершенные
+            </span>
+        </div>
+        
+        <div class="taskItem"
+            *ngFor="let complitedTask of complitedTasks"
+            >
+            <div class="taskItem__circle"></div>
+            <span class="taskItem__title">
+                {{ complitedTask }}
+            </span>
+        </div>
     </div>
 </div>

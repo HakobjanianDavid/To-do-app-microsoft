@@ -1,1 +1,71 @@
-<p>myday works!</p>
+<div class="inboxTitle" (click) = addTask()>
+    <div class="inboxTitleHeader">
+        <span class="inboxTitleHeader__title">
+            Мой день
+        </span>
+        <span class="inboxTitleHeader__date"> {{ day | date}}</span>
+    </div>
+    <div class="inboxTitle__sortBox"></div>
+</div>
+<div class="taskInputWrapper" #taskInputWrapper>
+    <div class="taskInputAddIcon" (click) = focusToInput($event) #addIconWrapper>
+        <img src="../../assets/images/leftBarSide/plusIcon.svg" alt="plus" class="taskInputAddIcon__Img" #addIcon>
+    </div>
+    
+    <input type="text" placeholder="Добавить задачу"
+    class="taskInputWrapper__inputField"
+    (click) = focusToInput($event)
+    (keydown.enter) = addTask()
+    #tasksInput [(ngModel)]="taskInput">
+    
+    <button *ngIf="tasksInput.value"
+    class="taskInputWrapper__addBtn"
+    (click) = addTask()
+    >
+        Добавить
+    </button>
+</div>
+
+<div class="tasks" (click) = addTask()>
+    
+    <div class="taskItem"
+        *ngFor="let task of dayTasks; let i=index"
+    >
+        <div class="taskItem__circle" (click) = "addInComplitedTask(task, i)"></div>
+        <span class="taskItem__title">
+            {{ task }}
+            <div class="">дневные</div>
+        </span>
+    </div>
+
+    
+    <div *ngIf="complitedTasks.length" class="complitedTasks" #complitedTasksWrapper>
+
+        <div class="complitedTasksHeader">
+            <img class="taskitem__arrow" src="../../assets/images/arrow.svg" (click) = openComplitedTask() #img>
+            <span class="taskItem__title">
+                Завершенные
+            </span>
+        </div>
+    
+        <div class="taskItem"
+            >
+            <div class="taskItem__circle"></div>
+            <span class="taskItem__title">
+                something
+            </span>
+        </div>
+        
+        <div class="taskItem"
+            *ngFor="let complitedTask of complitedTasks"
+            >
+            <div class="taskItem__circle"></div>
+            <span class="taskItem__title">
+                {{ complitedTask }}
+            </span>
+        </div>
+    </div>
+
+</div>
+
+    

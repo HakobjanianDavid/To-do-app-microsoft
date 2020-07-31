@@ -1,11 +1,14 @@
 import { Injectable, ElementRef } from '@angular/core';
 
+
 @Injectable({
 	providedIn: 'root'
 })
 export class TasksServiceService {
 
 	tasks: string[] = [];
+	dayTasks: string[] = [];
+	complitedTasks: string[] = ['1'];
 
 	inputElement: ElementRef;
 	taskInputWrapper: ElementRef;

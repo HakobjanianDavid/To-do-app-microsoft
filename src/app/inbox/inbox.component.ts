@@ -14,6 +14,7 @@ export class InboxComponent implements OnInit {
 	focusOutStyles;
 
 	tasks: string[] = [];
+	complitedTasks: string[] = [];
 
 	@ViewChild('tasksInput') inputElement: ElementRef;
 	@ViewChild('taskInputWrapper') taskInputWrapper: ElementRef;
@@ -27,6 +28,7 @@ export class InboxComponent implements OnInit {
 		this.tasks = tasksService.tasks;
 		this.focusOnStyles = tasksService.focusService;
 		this.focusOutStyles = tasksService.focusOutService;
+		this.complitedTasks = tasksService.complitedTasks;
 	}
 
 	ngOnInit(): void {
@@ -59,5 +61,10 @@ export class InboxComponent implements OnInit {
 		} else {
 			this.focusOutStyles();
 		}
+	}
+
+	addInComplitedTask(task, i) {
+		this.tasks.splice(i, 1);
+		this.complitedTasks.unshift(task);
 	}
 }

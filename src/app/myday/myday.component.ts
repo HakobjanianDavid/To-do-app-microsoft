@@ -1,3 +1,4 @@
+import { Task } from './../models/task.model';
 import { TasksServiceService } from './../services/tasks-service.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
@@ -10,12 +11,19 @@ export class MydayComponent implements OnInit {
 	taskInput: string;
 	flag: boolean = false;
 
+	openTask: boolean = false;
+
 	day: Date = new Date();
 
 	focusOnStyles;
 	focusOutStyles;
+	openComplitedTasks;
+	closeComplitedTasks;
 
-	dayTasks: string[] = [];
+	dayTasks: Task[] = [];
+
+
+	tasks: Task[] = [];
 	complitedTasks: string[] = [];
 
 	@ViewChild('tasksInput') inputElement: ElementRef;
@@ -25,13 +33,18 @@ export class MydayComponent implements OnInit {
 	@ViewChild('complitedTasksWrapper') complitedTasksWrapper: ElementRef;
 	@ViewChild('img') img: ElementRef;
 
+	@ViewChild('taskDetailBox') taskDetailBox: ElementRef;
+
 	inputFocus: boolean = false;
 
 	constructor(private tasksService: TasksServiceService) {
-		this.dayTasks = tasksService.dayTasks;
+		// this.tasks = tasksService.tasks;
+		// this.dayTasks = tasksService.dayTasks;
 		this.focusOnStyles = tasksService.focusService;
 		this.focusOutStyles = tasksService.focusOutService;
 		this.complitedTasks = tasksService.complitedTasks;
+		this.openComplitedTasks = tasksService.openComplitedTasks;
+		this.closeComplitedTasks = tasksService.closeComplitedTasks;
 	}
 
 	ngOnInit(): void {
@@ -59,7 +72,16 @@ export class MydayComponent implements OnInit {
 		if (this.taskInput) {
 			this.focusOutStyles()
 
-			this.dayTasks.push(this.taskInput);
+			this.tasks.push({ 
+				text: this.taskInput,
+				daily: true,
+			});
+
+			this.dayTasks.push({
+				text: this.taskInput,
+				daily: true,
+			});
+
 			this.taskInput = '';
 		} else {
 			this.focusOutStyles();
@@ -72,15 +94,18 @@ export class MydayComponent implements OnInit {
 		this.complitedTasks.unshift(task);
 	}
 
-	openComplitedTask() {
+	complitedTasksAppearance() {
 		if(!this.flag) {
-			this.complitedTasksWrapper.nativeElement.style.overflow = 'initial';
-			this.img.nativeElement.classList.add('screwArrowDown');
+			this.openComplitedTasks();
 			this.flag = !this.flag;
 		} else {
-			this.complitedTasksWrapper.nativeElement.style.overflow = 'hidden';
-			this.img.nativeElement.classList.remove('screwArrowDown');
+			this.closeComplitedTasks();
 			this.flag = !this.flag;
 		}
+	}
+
+	openTaskDetail() {
+		console.log(this.taskDetailBox.nativeElement);
+		this.taskDetailBox.nativeElement.classList.add('open');
 	}
 }

@@ -1,3 +1,4 @@
+import { TasksServiceService } from './../services/tasks-service.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
@@ -7,20 +8,30 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class NavHeaderComponent implements OnInit {
 
-  
-  constructor() { }
+  tasks: string[] = [];
+  searchedTasks = [];
+  value: string = '';
 
-  @ViewChild("searchField", {static: false})
-  searchField: ElementRef;
+  constructor(private tasksService: TasksServiceService) { 
+    this.tasks = tasksService.tasks;
+    this.searchedTasks = tasksService.searchTasks;
+  }
+  
+  // @ViewChild("searchField", {static: false})
+  // searchField: ElementRef;
   
   ngOnInit(): void {
   }
+  
+  searchTasks(inputTask) {
 
+    this.searchedTasks = this.tasks.filter(el => {
+      return el.includes(inputTask);
+    })
 
-  focusToInput(target) {
-    if( !target.classList.contains('closeIconWrapper') && !target.classList.contains('closeIcon')
-    ) {
-      this.searchField.nativeElement.focus();
-    }
+    this.tasksService.searchTasks = this.searchedTasks;
+
+    console.log(this.tasksService.searchTasks);
+    
   }
 }

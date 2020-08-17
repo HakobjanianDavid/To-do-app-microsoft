@@ -1,53 +1,93 @@
+<!-- Header Box -->
+<div class="header-box" (click) = addTask()>
 
-<div class="inboxTitle" (click) = addTask()>
-    <span class="inboxTitle__header">Задачи</span>
-    <div class="inboxTitle__sortBox"></div>
+    <!-- Header Left Side -->
+
+    <div class="header-title">
+        <span class="header-title__text">
+            Задачи
+        </span>
+    </div>
+
+    <!-- Header Rigth Side -->
+
+    <div class="header-sort-box">
+
+    </div>
 </div>
-<div class="taskInputWrapper" #taskInputWrapper>
-    <div class="taskInputAddIcon" (click) = focusToInput($event) #addIconWrapper>
-        <img src="../../assets/images/leftBarSide/plusIcon.svg" alt="plus" class="taskInputAddIcon__Img" #addIcon>
+
+<!-- Input Box -->
+
+<div class="task-input-wrapper" #taskInputWrapper>
+
+    <!-- Input-img Box -->
+
+    <div class="task-input-add-icon" (click) = focusToInput($event) #addIconWrapper>
+        <img src="../../assets/images/leftBarSide/plusIcon.svg" alt="plus" class="task-input-add-icon__img" #addIcon>
     </div>
     
+    <!-- Input Field Box -->
+
     <input type="text" placeholder="Добавить задачу"
-    class="taskInputWrapper__inputField"
-    (click) = focusToInput($event)
-    (keydown.enter) = addTask()
-    #tasksInput [(ngModel)]="taskInput">
+        class="task-input-wrapper__input-field"
+        (click) = focusToInput($event)
+        (keydown.enter) = addTask()
+        #tasksInput [(ngModel)]="taskInput">
+
+    <!-- Input add-task Box -->
     
     <button *ngIf="tasksInput.value"
-    class="taskInputWrapper__addBtn"
-    (click) = addTask()
+        class="task-input-wrapper__add-btn"
+        (click) = addTask()
     >
         Добавить
     </button>
 </div>
 
+<!-- All Tasks Box -->
+
 <div class="tasks" (click) = addTask()>
-    <div class="taskItem"
+    
+    <!-- Uncomplited Tasks Box -->
+
+    <div class="task-item"
         *ngFor="let task of tasks; let i=index"
     >
-        <div class="taskItem__circle" (click) = "addInComplitedTask(task, i)"></div>
-        <span class="taskItem__title">
+        <div class="task-item__icon-circle" (click) = "addInComplitedTask(task, i)"></div>
+        <span class="task-item__title">
             {{ task }}
         </span>
     </div>
 
+    <!-- Complited Tasks Box -->
+    
+    <div *ngIf="complitedTasks.length" 
+        class="complited-tasks" 
+        #complitedTasksWrapper>
 
-    <div class="" *ngIf="complitedTasks.length">
-        <div class="taskItem">
-            <div class="taskItem__circle"></div>
-            <span class="taskItem__title">
+        <!-- Complited Tasks Header -->
+
+        <div class="complited-tasks-header" (click) = complitedTasksAppearance()>
+            
+            <img class="complited-tasks-header__arrow" src="../../assets/images/arrow.svg" #img>
+
+            <span class="complited-tasks-header__title">
                 Завершенные
             </span>
         </div>
+    
+        <!-- Complited Tasks List -->
         
-        <div class="taskItem"
+        <div class="task-item"
             *ngFor="let complitedTask of complitedTasks"
             >
-            <div class="taskItem__circle"></div>
-            <span class="taskItem__title">
+            <div class="task-item__icon-circle complited_center"> 
+                <span>&#10004;</span>
+             </div>
+            <span class="task-item__title">
                 {{ complitedTask }}
             </span>
         </div>
     </div>
+
 </div>

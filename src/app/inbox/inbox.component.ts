@@ -12,6 +12,8 @@ export class InboxComponent implements OnInit {
 
 	focusOnStyles;
 	focusOutStyles;
+	openComplitedTasks;
+	closeComplitedTasks;
 
 	tasks: string[] = [];
 	complitedTasks: string[] = [];
@@ -20,15 +22,19 @@ export class InboxComponent implements OnInit {
 	@ViewChild('taskInputWrapper') taskInputWrapper: ElementRef;
 	@ViewChild('addIcon') addIcon: ElementRef;
 	@ViewChild('addIconWrapper') addIconWrapper: ElementRef;
-
+	@ViewChild('complitedTasksWrapper') complitedTasksWrapper: ElementRef;
+	@ViewChild('img') img: ElementRef;
 
 	inputFocus: boolean = false;
 
 	constructor(private tasksService: TasksServiceService) {
 		this.tasks = tasksService.tasks;
+		this.complitedTasks = tasksService.complitedTasks;
+		
 		this.focusOnStyles = tasksService.focusService;
 		this.focusOutStyles = tasksService.focusOutService;
-		this.complitedTasks = tasksService.complitedTasks;
+		this.openComplitedTasks = tasksService.openComplitedTasks;
+		this.closeComplitedTasks = tasksService.closeComplitedTasks;
 	}
 
 	ngOnInit(): void {
@@ -67,4 +73,15 @@ export class InboxComponent implements OnInit {
 		this.tasks.splice(i, 1);
 		this.complitedTasks.unshift(task);
 	}
+
+	complitedTasksAppearance() {
+		if(!this.flag) {
+			this.openComplitedTasks();
+			this.flag = !this.flag;
+		} else {
+			this.closeComplitedTasks();
+			this.flag = !this.flag;
+		}
+	}
+	
 }

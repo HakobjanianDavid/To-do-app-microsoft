@@ -1,71 +1,117 @@
-<div class="inboxTitle" (click) = addTask()>
-    <div class="inboxTitleHeader">
-        <span class="inboxTitleHeader__title">
-            Мой день
-        </span>
-        <span class="inboxTitleHeader__date"> {{ day | date}}</span>
-    </div>
-    <div class="inboxTitle__sortBox"></div>
-</div>
-<div class="taskInputWrapper" #taskInputWrapper>
-    <div class="taskInputAddIcon" (click) = focusToInput($event) #addIconWrapper>
-        <img src="../../assets/images/leftBarSide/plusIcon.svg" alt="plus" class="taskInputAddIcon__Img" #addIcon>
-    </div>
+<div class="mainBox">
+    <!-- Header Box -->
+    <div class="header-box" (click) = addTask()>
     
-    <input type="text" placeholder="Добавить задачу"
-    class="taskInputWrapper__inputField"
-    (click) = focusToInput($event)
-    (keydown.enter) = addTask()
-    #tasksInput [(ngModel)]="taskInput">
+        <!-- Header Left Side -->
     
-    <button *ngIf="tasksInput.value"
-    class="taskInputWrapper__addBtn"
-    (click) = addTask()
-    >
-        Добавить
-    </button>
-</div>
-
-<div class="tasks" (click) = addTask()>
-    
-    <div class="taskItem"
-        *ngFor="let task of dayTasks; let i=index"
-    >
-        <div class="taskItem__circle" (click) = "addInComplitedTask(task, i)"></div>
-        <span class="taskItem__title">
-            {{ task }}
-            <div class="">дневные</div>
-        </span>
-    </div>
-
-    
-    <div *ngIf="complitedTasks.length" class="complitedTasks" #complitedTasksWrapper>
-
-        <div class="complitedTasksHeader">
-            <img class="taskitem__arrow" src="../../assets/images/arrow.svg" (click) = openComplitedTask() #img>
-            <span class="taskItem__title">
-                Завершенные
+        <div class="header-title">
+            <span class="header-title__text">
+                Мой день
             </span>
+            
+            <span class="header-title__date"> {{ day | date}}</span>
         </div>
     
-        <div class="taskItem"
-            >
-            <div class="taskItem__circle"></div>
-            <span class="taskItem__title">
-                something
-            </span>
+        <!-- Header Rigth Side -->
+    
+        <div class="header-sort-box">
+    
+        </div>
+    </div>
+    
+    <!-- Input Box -->
+    
+    <div class="task-input-wrapper" #taskInputWrapper>
+    
+        <!-- Input-img Box -->
+    
+        <div class="task-input-add-icon" (click) = focusToInput($event) #addIconWrapper>
+            <img src="../../assets/images/leftBarSide/plusIcon.svg" alt="plus" class="task-input-add-icon__img" #addIcon>
         </div>
         
-        <div class="taskItem"
-            *ngFor="let complitedTask of complitedTasks"
-            >
-            <div class="taskItem__circle"></div>
-            <span class="taskItem__title">
-                {{ complitedTask }}
+        <!-- Input Field Box -->
+    
+        <input type="text" placeholder="Добавить задачу"
+            class="task-input-wrapper__input-field"
+            (click) = focusToInput($event)
+            (keydown.enter) = addTask()
+            #tasksInput [(ngModel)]="taskInput">
+    
+        <!-- Input add-task Box -->
+        
+        <button *ngIf="tasksInput.value"
+            class="task-input-wrapper__add-btn"
+            (click) = addTask()
+        >
+            Добавить
+        </button>
+    </div>
+    
+    <!-- All Tasks Box -->
+    
+    <div class="tasks" (click) = addTask()>
+        
+        <!-- Uncomplited Tasks Box -->
+
+        <div class="task-item"
+            (click) = openTaskDetail();
+        >
+        sd
+            <!-- <div class="task-item__icon-circle" (click) = "addInComplitedTask(task, i)"></div>
+
+            <span class="task-item__title">
+                {{ task.text }}
+                <div class="" *ngIf="task.daily">Дневные</div>
+            </span> -->
+        </div>
+    
+        <div class="task-item"
+            *ngFor="let task of dayTasks; let i=index"
+            (click) = openTaskDetail();
+        >
+            <div class="task-item__icon-circle" (click) = "addInComplitedTask(task, i)"></div>
+
+            <span class="task-item__title">
+                {{ task.text }}
+                <div class="" *ngIf="task.daily">Дневные</div>
             </span>
         </div>
+    
+        <!-- Complited Tasks Box -->
+        
+        <div *ngIf="complitedTasks.length" 
+            class="complited-tasks" 
+            #complitedTasksWrapper>
+    
+            <!-- Complited Tasks Header -->
+    
+            <div class="complited-tasks-header" (click) = complitedTasksAppearance()>
+                
+                <img class="complited-tasks-header__arrow" src="../../assets/images/arrow.svg" #img>
+    
+                <span class="complited-tasks-header__title">
+                    Завершенные
+                </span>
+            </div>
+        
+            <!-- Complited Tasks List -->
+            
+            <div class="task-item"
+                *ngFor="let complitedTask of complitedTasks"
+                >
+                <div class="task-item__icon-circle"></div>
+                <span class="task-item__title">
+                    {{ complitedTask }}
+                </span>
+            </div>
+        </div>
+    
     </div>
-
+    
+    
 </div>
 
+<div class="taskDetail" #taskDetailBox>
+    <app-task-detail></app-task-detail>
+</div>
     

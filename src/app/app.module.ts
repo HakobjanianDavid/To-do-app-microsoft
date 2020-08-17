@@ -15,6 +15,8 @@ import { PlannedComponent } from './planned/planned.component';
 import { ImportantComponent } from './important/important.component';
 import { MydayComponent } from './myday/myday.component';
 import { InboxComponent } from './inbox/inbox.component';
+import { SearchComponentComponent } from './search-component/search-component.component';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
 
 const route: Routes = [
   {
@@ -27,10 +29,6 @@ const route: Routes = [
     component: InboxComponent
   },
   {
-    path: 'tasks/assigned_to_me',
-    component: AssignedToMeComponent
-  },
-  {
     path: 'tasks/planned',
     component: PlannedComponent
   },
@@ -41,6 +39,10 @@ const route: Routes = [
   {
     path: 'tasks/myday',
     component: MydayComponent
+  },
+  {
+    path: 'search',
+    component: SearchComponentComponent
   },
 ]
 
@@ -55,7 +57,9 @@ const route: Routes = [
     PlannedComponent,
     ImportantComponent,
     MydayComponent,
-    InboxComponent
+    InboxComponent,
+    SearchComponentComponent,
+    TaskDetailComponent
   ],
   imports: [
     BrowserModule,

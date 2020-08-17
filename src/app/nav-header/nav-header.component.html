@@ -4,13 +4,15 @@
     </a>
 </div>
 
-<div class="searchWrapper rigthSide" (click) = focusToInput($event.target)>
+<div class="searchWrapper rigthSide">
     <div class="searchIconWrapper">
         <img src="../../assets/images/searchIcon.svg" alt="searchImg" class="searchInputIcons">
     </div>
 
-    <input type="text" #searchField>
+    <input type="text" #searchField [(ngModel)] = value [routerLink] = "'search'">
+
     <div class="closeIconWrapper">
         <img src="../../assets/images/closeSearchIcon.svg" alt="closeSearchImg" class="searchInputIcons closeIcon">
     </div>
+
 </div>

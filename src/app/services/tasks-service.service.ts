@@ -6,15 +6,35 @@ import { Injectable, ElementRef } from '@angular/core';
 })
 export class TasksServiceService {
 
-	tasks: string[] = [];
-	dayTasks: string[] = [];
-	complitedTasks: string[] = ['1'];
+	tasks: string [] = ['sas'];
+
+	dayTasks: string [] = [];
+	plannedTasks: string [] = [];
+	importantTasks: string [] = [];
+
+	complitedTasks: string [] = [];
+	searchTasks: string [] = [];
+ 
+	allTasks: {} [] = [
+		{
+			text: 'sas',
+			daily: true,
+		}
+	]
+
+	value;
 
 	inputElement: ElementRef;
 	taskInputWrapper: ElementRef;
 	addIcon: ElementRef;
+	complitedTasksWrapper: ElementRef;
+	img: ElementRef;
 
-	constructor() { }
+
+	testTasks: {}[] = [];
+
+	constructor() {
+	}
 
 	focusService() {
 		this.inputElement.nativeElement.focus();
@@ -30,5 +50,15 @@ export class TasksServiceService {
 		this.inputElement.nativeElement.classList.remove('otherColorPlaceholder')
 
 		this.inputElement.nativeElement.blur();
+	}
+
+	openComplitedTasks() {
+		this.complitedTasksWrapper.nativeElement.style.overflow = 'initial';
+		this.img.nativeElement.classList.add('screwArrowDown');
+	}
+
+	closeComplitedTasks() {
+		this.complitedTasksWrapper.nativeElement.style.overflow = 'hidden';
+		this.img.nativeElement.classList.remove('screwArrowDown');
 	}
 }

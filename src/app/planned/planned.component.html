@@ -1,1 +1,65 @@
-<p>planned works!</p>
+<!-- Header Box -->
+<div class="header-box" (click) = addTask()>
+
+    <!-- Header Left Side -->
+
+    <div class="header-title">
+        <span class="header-title__text">
+            Мой день
+        </span>
+        
+        <span class="header-title__date"> {{ day | date}}</span>
+    </div>
+
+    <!-- Header Rigth Side -->
+
+    <div class="header-sort-box">
+
+    </div>
+</div>
+
+<!-- Input Box -->
+
+<div class="task-input-wrapper" #taskInputWrapper>
+
+    <!-- Input-img Box -->
+
+    <div class="task-input-add-icon" (click) = focusToInput($event) #addIconWrapper>
+        <img src="../../assets/images/leftBarSide/plusIcon.svg" alt="plus" class="task-input-add-icon__img" #addIcon>
+    </div>
+    
+    <!-- Input Field Box -->
+
+    <input type="text" placeholder="Добавить задачу"
+        class="task-input-wrapper__input-field"
+        (click) = focusToInput($event)
+        (keydown.enter) = addTask()
+        #tasksInput [(ngModel)]="taskInput">
+
+    <!-- Input add-task Box -->
+    
+    <button *ngIf="tasksInput.value"
+        class="task-input-wrapper__add-btn"
+        (click) = addTask()
+    >
+        Добавить
+    </button>
+</div>
+
+<!-- All Tasks Box -->
+
+<div class="tasks" (click) = addTask()>
+    
+    <!-- Uncomplited Tasks Box -->
+    Сегодня
+
+    <div class="task-item"
+        *ngFor="let task of plannedTasks; let i=index"
+    >
+        <div class="task-item__icon-circle" (click) = "addInComplitedTask(task, i)"></div>
+        <span class="task-item__title">
+            {{ task }}
+        </span>
+    </div>
+
+</div>

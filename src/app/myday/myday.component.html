@@ -1,6 +1,6 @@
 <div class="mainBox">
     <!-- Header Box -->
-    <div class="header-box" (click) = addTask()>
+    <div class="header-box">
     
         <!-- Header Left Side -->
     
@@ -35,8 +35,9 @@
             class="task-input-wrapper__input-field"
             (click) = focusToInput($event)
             (keydown.enter) = addTask()
+            (blur) = addTask()
             #tasksInput [(ngModel)]="taskInput">
-    
+        
         <!-- Input add-task Box -->
         
         <button *ngIf="tasksInput.value"
@@ -49,25 +50,13 @@
     
     <!-- All Tasks Box -->
     
-    <div class="tasks" (click) = addTask()>
+    <div class="tasks">
         
         <!-- Uncomplited Tasks Box -->
-
-        <div class="task-item"
-            (click) = openTaskDetail();
-        >
-        sd
-            <!-- <div class="task-item__icon-circle" (click) = "addInComplitedTask(task, i)"></div>
-
-            <span class="task-item__title">
-                {{ task.text }}
-                <div class="" *ngIf="task.daily">Дневные</div>
-            </span> -->
-        </div>
     
         <div class="task-item"
-            *ngFor="let task of dayTasks; let i=index"
-            (click) = openTaskDetail();
+            *ngFor="let task of tasks; let i=index"
+            (click) = openTaskDetail(task);
         >
             <div class="task-item__icon-circle" (click) = "addInComplitedTask(task, i)"></div>
 
@@ -111,7 +100,9 @@
     
 </div>
 
-<div class="taskDetail" #taskDetailBox>
-    <app-task-detail></app-task-detail>
+<div *ngIf="openDetail" class="taskDetail" #taskDetailBox>
+    <app-task-detail 
+        
+    ></app-task-detail>
 </div>
     

@@ -1,32 +1,38 @@
 <div class="taskDetailBox">
     <div class="section taskDetailInstance">
         <div class="circle"></div>
-        <input type="text">
-        <img src="" alt="star">
+        <input 
+            (blur) = blur()
+            type="text" 
+            placeholder= {{myTask.text}}>
+        <img src="../../assets/images/taskDetail/starIcon.svg" alt="star">
     </div>
 
     <div class="section myDayBox">
-        <img src="" alt="sun">
-        <span>Добавить в в представление мой день</span>
+        <img src="../../assets/images/leftBarSide/sunIcon.svg" alt="sun">
+        <span (click) = lookObject()>Добавить в в представление мой день</span>
     </div>
 
     <div class="section">
         <div class="section-item">
-            <img src="" alt="it">
+            <img src="../../assets/images/taskDetail/alarmClock.svg" alt="it">
             <span>Напомнить</span>
         </div>
         <div class="section-item">
-            <img src="" alt="it">
+            <img src="../../assets/images/taskDetail/calendar.svg" alt="it">
             <span>Добавить дату выполнения</span>
         </div>
         <div class="section-item">
-            <img src="" alt="it">
+            <img src="../../assets/images/taskDetail/repeat.svg" alt="it">
             <span>Повтор</span>
         </div>
     </div>
 
-    <div class="detailCategory-section">
-
+    <div class="section detailCategory-section">
+        <div class="section-item">
+            <img src="../../assets/images/taskDetail/repeat.svg" alt="it">
+            <span>Выберите категорию</span>
+        </div>
     </div>
 
     <div class="detailSectionFooter"></div>

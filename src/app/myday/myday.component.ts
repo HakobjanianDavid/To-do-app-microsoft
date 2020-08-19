@@ -1,6 +1,7 @@
+import { OpenTaskDetailService } from './../services/open-task-detail.service';
 import { Task } from './../models/task.model';
 import { TasksServiceService } from './../services/tasks-service.service';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 
 @Component({
 	selector: 'app-myday',
@@ -10,6 +11,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 export class MydayComponent implements OnInit {
 	taskInput: string;
 	flag: boolean = false;
+	taskInputObject: Task[] = [];
+
+	openDetail: boolean = false;
 
 	openTask: boolean = false;
 
@@ -22,9 +26,12 @@ export class MydayComponent implements OnInit {
 
 	dayTasks: Task[] = [];
 
+	myTask: Task ;
+
 
 	tasks: Task[] = [];
 	complitedTasks: string[] = [];
+
 
 	@ViewChild('tasksInput') inputElement: ElementRef;
 	@ViewChild('taskInputWrapper') taskInputWrapper: ElementRef;
@@ -37,7 +44,9 @@ export class MydayComponent implements OnInit {
 
 	inputFocus: boolean = false;
 
-	constructor(private tasksService: TasksServiceService) {
+	constructor(private tasksService: TasksServiceService,
+				private taskDetailService: OpenTaskDetailService		
+		) {
 		// this.tasks = tasksService.tasks;
 		// this.dayTasks = tasksService.dayTasks;
 		this.focusOnStyles = tasksService.focusService;
@@ -45,6 +54,10 @@ export class MydayComponent implements OnInit {
 		this.complitedTasks = tasksService.complitedTasks;
 		this.openComplitedTasks = tasksService.openComplitedTasks;
 		this.closeComplitedTasks = tasksService.closeComplitedTasks;
+
+
+
+		// this.myTask = taskDetailService.task;
 	}
 
 	ngOnInit(): void {
@@ -86,6 +99,12 @@ export class MydayComponent implements OnInit {
 		} else {
 			this.focusOutStyles();
 		}
+
+		this.taskInputObject.push({
+			text: this.taskInput,
+			daily: true,
+		})
+
 	}
 
 
@@ -104,8 +123,12 @@ export class MydayComponent implements OnInit {
 		}
 	}
 
-	openTaskDetail() {
-		console.log(this.taskDetailBox.nativeElement);
-		this.taskDetailBox.nativeElement.classList.add('open');
+	openTaskDetail(task) {
+		this.taskDetailService.task = task;
+
+		this.openDetail = true;
+		console.log(this.taskDetailService.task);
 	}
+
+
 }

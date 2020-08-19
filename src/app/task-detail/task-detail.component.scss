@@ -6,13 +6,67 @@
 
     .section {
         margin-top: 10px;
-        height: 80px;
         background-color: #ffffff;
+
+        display: flex;
+        flex-direction: column;
+
+        &>img {
+            width: 25px;
+            margin-left: 10px;
+        }
+
+        &:first-child {
+            margin-top: 0px;
+        }
+
+        .section-item {
+            height: 50px;
+            display: flex;
+            align-items: center;
+
+            border-bottom: 1px solid black;
+            border-color: #eff0f1;
+
+            img {
+                width: 25px;
+                margin-left: 10px;
+            }
+
+            span {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    .taskDetailInstance {
+        align-items: flex-start;
+        padding: 0 15px;
+        flex-direction: row;
+        height: 50px;
+        align-items: center;
+
+        .circle {
+            width: 17px;
+            height: 17px;
+            border: 1px solid black;
+
+            border-radius: 50%;
+        }
+
+        input {
+            flex: 1;
+            margin: 0 10px;
+            border: none;
+            height: 30px;
+            
+            overflow: hidden;
+        }
     }
 
     .myDayBox {
         height: 50px;
-        display: flex;
+        flex-direction: row;
         align-items: center;
 
         span {
@@ -20,13 +74,8 @@
         }
     }
 
-    .taskDetailInstance {
-        display: flex;
-        align-items: flex-start;
-        padding-top: 10px;
-
-        .circle {
-            width: 50px;
-        }
+    .detailCategory-section {
+        flex-direction: row;
+        align-items: center;
     }
 }

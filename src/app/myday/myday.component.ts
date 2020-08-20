@@ -9,28 +9,36 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 	styleUrls: ['./myday.component.scss']
 })
 export class MydayComponent implements OnInit {
+	
+	// То что ввёл пользователь в input
 	taskInput: string;
-	flag: boolean = false;
-	taskInputObject: Task[] = [];
 
+	// флаг открытия и закрытия завершенных задач
+	flag: boolean = false;
+
+	// флаг открытия деатально задачи
 	openDetail: boolean = false;
 
-	openTask: boolean = false;
+	// задача на которую кликнули для детального просмотра
+	openedTask: Task;
 
+	// сегодняшняя дата
 	day: Date = new Date();
 
-	focusOnStyles;
-	focusOutStyles;
+	// функции из сервиса которые необходимо просмотреть
+	focusToInput;
+	inputBlur;
 	openComplitedTasks;
 	closeComplitedTasks;
 
+	// массив всех задач
+	tasks: Task[] = [];
+
+	// массив дневных задач
 	dayTasks: Task[] = [];
 
-	myTask: Task ;
-
-
-	tasks: Task[] = [];
-	complitedTasks: string[] = [];
+	// массив выполненных задач
+	complitedTasks: Task[] = [];
 
 
 	@ViewChild('tasksInput') inputElement: ElementRef;
@@ -42,75 +50,61 @@ export class MydayComponent implements OnInit {
 
 	@ViewChild('taskDetailBox') taskDetailBox: ElementRef;
 
-	inputFocus: boolean = false;
-
 	constructor(private tasksService: TasksServiceService,
 				private taskDetailService: OpenTaskDetailService		
 		) {
-		// this.tasks = tasksService.tasks;
-		// this.dayTasks = tasksService.dayTasks;
-		this.focusOnStyles = tasksService.focusService;
-		this.focusOutStyles = tasksService.focusOutService;
+		this.tasks = tasksService.tasks;
 		this.complitedTasks = tasksService.complitedTasks;
+		this.dayTasks = tasksService.dayTasks;
+
+		this.focusToInput = tasksService.focusService;
+		this.inputBlur = tasksService.focusOutService;
+
 		this.openComplitedTasks = tasksService.openComplitedTasks;
 		this.closeComplitedTasks = tasksService.closeComplitedTasks;
-
-
-
-		// this.myTask = taskDetailService.task;
 	}
 
-	ngOnInit(): void {
-	}
-
-	focusToInput(event) {
-		if (event.target === this.addIconWrapper.nativeElement || event.target === this.addIcon.nativeElement) {
-
-			if (this.addIcon.nativeElement.src === 'http://localhost:4200/assets/images/leftBarSide/plusIcon.svg') {
-				this.focusOnStyles();
-			}
-			else {
-				if (this.inputElement) {
-					this.addTask();
-				} else {
-					this.focusOutStyles();
-				}
-			}
-		} else {
-			this.focusOnStyles();
-		}
-	}
+	ngOnInit(): void {}
 
 	addTask() {
+		/* если поле заполнено то добавляем в массив задач новую задачу,
+		   а если поле не заполнено то уводим фокус от инпута 	
+		*/
 		if (this.taskInput) {
-			this.focusOutStyles()
+			
+			this.inputBlur()
 
 			this.tasks.push({ 
 				text: this.taskInput,
 				daily: true,
+				complited: false
 			});
 
 			this.dayTasks.push({
 				text: this.taskInput,
 				daily: true,
-			});
+				complited: false
+			})
 
 			this.taskInput = '';
 		} else {
-			this.focusOutStyles();
+			this.inputBlur();			
 		}
-
-		this.taskInputObject.push({
-			text: this.taskInput,
-			daily: true,
-		})
-
 	}
 
 
 	addInComplitedTask(task, i) {
+		task.complited = true;
+		this.tasks.splice(i, 1);
 		this.dayTasks.splice(i, 1);
 		this.complitedTasks.unshift(task);
+	}
+
+	removeFromComplited(task, i) {
+		task.complited = false;
+		this.complitedTasks.splice(i, 1);
+		this.tasks.push(task);
+		this.dayTasks.push(task);
 	}
 
 	complitedTasksAppearance() {
@@ -124,11 +118,7 @@ export class MydayComponent implements OnInit {
 	}
 
 	openTaskDetail(task) {
-		this.taskDetailService.task = task;
-
 		this.openDetail = true;
-		console.log(this.taskDetailService.task);
+		this.openedTask = task;
 	}
-
-
 }

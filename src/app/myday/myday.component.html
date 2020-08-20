@@ -25,17 +25,21 @@
     
         <!-- Input-img Box -->
     
-        <div class="task-input-add-icon" (click) = focusToInput($event) #addIconWrapper>
+        <div 
+            class="task-input-add-icon" 
+            (click) = focusToInput($event)
+            #addIconWrapper>
+
             <img src="../../assets/images/leftBarSide/plusIcon.svg" alt="plus" class="task-input-add-icon__img" #addIcon>
         </div>
         
         <!-- Input Field Box -->
     
         <input type="text" placeholder="Добавить задачу"
-            class="task-input-wrapper__input-field"
+        class="task-input-wrapper__input-field"
             (click) = focusToInput($event)
-            (keydown.enter) = addTask()
             (blur) = addTask()
+            (keydown.enter) = addTask()
             #tasksInput [(ngModel)]="taskInput">
         
         <!-- Input add-task Box -->
@@ -53,15 +57,17 @@
     <div class="tasks">
         
         <!-- Uncomplited Tasks Box -->
-    
+        
         <div class="task-item"
-            *ngFor="let task of tasks; let i=index"
-            (click) = openTaskDetail(task);
+        *ngFor="let task of dayTasks; let i=index"
         >
             <div class="task-item__icon-circle" (click) = "addInComplitedTask(task, i)"></div>
-
-            <span class="task-item__title">
+            
+            <span class="task-item__title"
+                (click) = "openTaskDetail(task)"
+            >
                 {{ task.text }}
+                <div class="" *ngIf="task.looked"> {{ task.looked }} </div>
                 <div class="" *ngIf="task.daily">Дневные</div>
             </span>
         </div>
@@ -86,11 +92,15 @@
             <!-- Complited Tasks List -->
             
             <div class="task-item"
-                *ngFor="let complitedTask of complitedTasks"
+                *ngFor="let complitedTask of complitedTasks; let i = index"
                 >
-                <div class="task-item__icon-circle"></div>
-                <span class="task-item__title">
-                    {{ complitedTask }}
+                <div class="task-item__icon-circle"
+                    (click) = "removeFromComplited(complitedTask, i)"
+                ></div>
+                <span class="task-item__title"
+                    (click) = "openTaskDetail(complitedTask)"
+                >
+                    {{ complitedTask.text }}
                 </span>
             </div>
         </div>
@@ -102,7 +112,7 @@
 
 <div *ngIf="openDetail" class="taskDetail" #taskDetailBox>
     <app-task-detail 
-        
+        [myTask] = openedTask
     ></app-task-detail>
 </div>
     

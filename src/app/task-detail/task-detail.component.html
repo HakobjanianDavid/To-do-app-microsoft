@@ -4,6 +4,7 @@
         <input 
             (blur) = blur()
             type="text" 
+            [(ngModel)] = myTask.text
             placeholder= {{myTask.text}}>
         <img src="../../assets/images/taskDetail/starIcon.svg" alt="star">
     </div>
@@ -35,5 +36,12 @@
         </div>
     </div>
 
-    <div class="detailSectionFooter"></div>
+    <div class="detailSectionFooter">
+
+        <div class="" *ngIf="myTask.complited; else uncomplited"> Завершено </div>
+        <ng-template #uncomplited>
+
+            <div class=""> Не завершено </div>
+        </ng-template>
+    </div>
 </div>

@@ -9,15 +9,13 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 })
 export class TaskDetailComponent implements OnInit {
 
-  // @Input() taskInputObject;
-
-  myTask;
+  @Input() myTask: Task;
   
   
   @ViewChild('input') input: ElementRef;
 
   constructor( private taskDetailService: OpenTaskDetailService) { 
-    this.myTask = taskDetailService.task;
+    // this.myTask = taskDetailService.task;
   }
 
   ngOnInit(): void {
@@ -25,6 +23,7 @@ export class TaskDetailComponent implements OnInit {
   }
 
   lookObject() {
+    // this.myTask.looked = 'добавлено'
     console.log(this.myTask);
   }
 

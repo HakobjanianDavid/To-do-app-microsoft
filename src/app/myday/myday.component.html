@@ -68,6 +68,9 @@
                     (click) = "openTaskDetail(task)"
                 >
                     {{ task.text }}
+                    <div class="" *ngIf="task.reminder < timeCounter">
+                        просрочено
+                    </div>
                     <div class="" *ngIf="task.looked"> {{ task.looked }} </div>
                     <div class="" *ngIf="task.daily">Дневные</div>
                 </span>

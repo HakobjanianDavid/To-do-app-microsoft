@@ -24,6 +24,7 @@ export class MydayComponent implements OnInit {
 
 	// сегодняшняя дата
 	day: Date = new Date();
+	timeCounter = Date.now();
 
 	// функции из сервиса которые необходимо просмотреть
 	focusToInput;
@@ -64,7 +65,11 @@ export class MydayComponent implements OnInit {
 		this.closeComplitedTasks = tasksService.closeComplitedTasks;
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		setInterval((el) => {
+			this.timeCounter = Date.now();
+		}, 1)
+	}
 
 	addTask() {
 		/* если поле заполнено то добавляем в массив задач новую задачу,

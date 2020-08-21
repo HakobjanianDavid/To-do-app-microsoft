@@ -33,7 +33,12 @@ export class TaskDetailComponent implements OnInit {
     console.log(this.myTask);
   }
 
+  setReminder() {
+    this.myTask.reminder = Date.now() + 1000;
+    let day = Date.now();
+  }
+
   blur() {
-    console.log(this.myTask);
+    console.log(this.myTask.reminder);
   }
 }

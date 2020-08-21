@@ -22,8 +22,14 @@ export class TaskDetailComponent implements OnInit {
     // console.log(this.myTask);
   }
 
-  lookObject() {
+  addToDailyTasks() {
     // this.myTask.looked = 'добавлено'
+    this.myTask.daily = true;
+    console.log(this.myTask);
+  }
+
+  deleteFromDailyTasks() {
+    this.myTask.daily = false;
     console.log(this.myTask);
   }
 

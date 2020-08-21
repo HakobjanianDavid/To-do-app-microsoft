@@ -9,10 +9,27 @@
         <img src="../../assets/images/taskDetail/starIcon.svg" alt="star">
     </div>
 
+
     <div class="section myDayBox">
         <img src="../../assets/images/leftBarSide/sunIcon.svg" alt="sun">
-        <span (click) = lookObject()>Добавить в в представление мой день</span>
+        
+        <span 
+            *ngIf="!myTask.daily; 
+            else daily"
+            (click) = addToDailyTasks()
+            >
+            Добавить в представление мой день
+        </span>
+
+        <ng-template #daily>
+            <span>Добавлено в представление мой день</span>
+            <span 
+                class="closeImg"
+                (click) = deleteFromDailyTasks()    
+            >close</span>
+        </ng-template>
     </div>
+
 
     <div class="section">
         <div class="section-item">

@@ -12,7 +12,7 @@
         flex-direction: column;
 
         &>img {
-            width: 25px;
+            width: 14px;
             margin-left: 10px;
         }
 
@@ -25,11 +25,25 @@
             display: flex;
             align-items: center;
 
-            border-bottom: 1px solid black;
-            border-color: #eff0f1;
+            // border-bottom: 1px solid black;
+            // border-color: #eff0f1;
+
+            border: 1px solid darken($color: rgb(245, 245, 245), $amount: 10);
+
+            &:hover {
+                background-color: rgb(240,240,240);
+            }
+
+            &:first-child {
+                border-bottom: 0px;
+            }
+
+            &:last-child {
+                border-top: 0px;
+            }
 
             img {
-                width: 25px;
+                width: 14px;
                 margin-left: 10px;
             }
 
@@ -68,14 +82,22 @@
         height: 50px;
         flex-direction: row;
         align-items: center;
+        border: 1px solid darken($color: rgb(245, 245, 245), $amount: 10);
 
         span {
             margin-left: 20px;
+        }
+
+        &:hover {
+            background-color: rgb(240,240,240);
         }
     }
 
     .detailCategory-section {
         flex-direction: row;
         align-items: center;
+        flex-grow: 1;
+
+        border: 1px solid darken($color: rgb(245, 245, 245), $amount: 10);
     }
 }

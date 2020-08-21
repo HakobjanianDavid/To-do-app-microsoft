@@ -58,19 +58,21 @@
         
         <!-- Uncomplited Tasks Box -->
         
-        <div class="task-item"
-        *ngFor="let task of dayTasks; let i=index"
+        <ng-container
+            *ngFor="let task of tasks; let i=index"
         >
-            <div class="task-item__icon-circle" (click) = "addInComplitedTask(task, i)"></div>
-            
-            <span class="task-item__title"
-                (click) = "openTaskDetail(task)"
-            >
-                {{ task.text }}
-                <div class="" *ngIf="task.looked"> {{ task.looked }} </div>
-                <div class="" *ngIf="task.daily">Дневные</div>
-            </span>
-        </div>
+            <div class="task-item" *ngIf="task.daily">
+                <div class="task-item__icon-circle" (click) = "addInComplitedTask(task, i)"></div>
+                
+                <span class="task-item__title"
+                    (click) = "openTaskDetail(task)"
+                >
+                    {{ task.text }}
+                    <div class="" *ngIf="task.looked"> {{ task.looked }} </div>
+                    <div class="" *ngIf="task.daily">Дневные</div>
+                </span>
+            </div>
+        </ng-container>
     
         <!-- Complited Tasks Box -->
         

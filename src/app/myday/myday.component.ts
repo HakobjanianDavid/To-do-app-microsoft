@@ -35,7 +35,7 @@ export class MydayComponent implements OnInit {
 	tasks: Task[] = [];
 
 	// массив дневных задач
-	dayTasks: Task[] = [];
+	// dayTasks: Task[] = [];
 
 	// массив выполненных задач
 	complitedTasks: Task[] = [];
@@ -55,7 +55,7 @@ export class MydayComponent implements OnInit {
 		) {
 		this.tasks = tasksService.tasks;
 		this.complitedTasks = tasksService.complitedTasks;
-		this.dayTasks = tasksService.dayTasks;
+		// this.dayTasks = tasksService.dayTasks;
 
 		this.focusToInput = tasksService.focusService;
 		this.inputBlur = tasksService.focusOutService;
@@ -80,11 +80,11 @@ export class MydayComponent implements OnInit {
 				complited: false
 			});
 
-			this.dayTasks.push({
-				text: this.taskInput,
-				daily: true,
-				complited: false
-			})
+			// this.dayTasks.push({
+			// 	text: this.taskInput,
+			// 	daily: true,
+			// 	complited: false
+			// })
 
 			this.taskInput = '';
 		} else {
@@ -96,7 +96,7 @@ export class MydayComponent implements OnInit {
 	addInComplitedTask(task, i) {
 		task.complited = true;
 		this.tasks.splice(i, 1);
-		this.dayTasks.splice(i, 1);
+		// this.dayTasks.splice(i, 1);
 		this.complitedTasks.unshift(task);
 	}
 
@@ -104,7 +104,7 @@ export class MydayComponent implements OnInit {
 		task.complited = false;
 		this.complitedTasks.splice(i, 1);
 		this.tasks.push(task);
-		this.dayTasks.push(task);
+		// this.dayTasks.push(task);
 	}
 
 	complitedTasksAppearance() {

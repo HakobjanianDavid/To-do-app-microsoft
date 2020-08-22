@@ -25,13 +25,13 @@
             display: flex;
             align-items: center;
 
-            // border-bottom: 1px solid black;
-            // border-color: #eff0f1;
+            position: relative;
 
             border: 1px solid darken($color: rgb(245, 245, 245), $amount: 10);
 
             &:hover {
                 background-color: rgb(240,240,240);
+                cursor: pointer;
             }
 
             &:first-child {
@@ -42,13 +42,51 @@
                 border-top: 0px;
             }
 
-            img {
+            >img {
                 width: 14px;
                 margin-left: 10px;
             }
 
-            span {
+            >span {
                 margin-left: 20px;
+            }
+
+            .notificationMenu-container {
+                position: absolute;
+                left: 43px;
+                top: 50px;
+                z-index: 100500;
+                background-color: #ffffff;
+                border: 1px solid rgb(122,131,141);
+                width: 244px;
+                max-height: 750px;
+
+                .notificationMenu-title {
+                    display: flex;
+                    justify-content: center;
+                    height: 40px;
+                    align-items: center;
+                    border-bottom: 1px solid rgb(122,131,141);
+                }
+
+                .notificationMenu-items {
+
+                    .notificationMenu-items-list {
+                        list-style: none;
+
+                        .notificationMenu-items-list__item {
+                            height: 35px;
+                            display: flex;
+                            align-items: center;
+                            padding-left: 10px;
+
+                            &:hover {
+                                background-color: rgb(240,240,240);
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -91,13 +129,20 @@
         &:hover {
             background-color: rgb(240,240,240);
         }
+
+        .myDayBox__note {
+            color: rgb(0,120,215);
+        }
     }
 
     .detailCategory-section {
         flex-direction: row;
         align-items: center;
-        flex-grow: 1;
-
+        
         border: 1px solid darken($color: rgb(245, 245, 245), $amount: 10);
+        
+        .section-item {
+            flex-grow: 1;
+        }
     }
 }

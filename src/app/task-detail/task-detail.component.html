@@ -2,7 +2,6 @@
     <div class="section taskDetailInstance">
         <div class="circle"></div>
         <input 
-            (blur) = blur()
             type="text" 
             [(ngModel)] = myTask.text
             placeholder= {{myTask.text}}>
@@ -22,7 +21,8 @@
         </span>
 
         <ng-template #daily>
-            <span>Добавлено в представление мой день</span>
+            <span class="myDayBox__note">Добавлено в представление мой день</span>
+            
             <span 
                 class="closeImg"
                 (click) = deleteFromDailyTasks()    
@@ -33,15 +33,66 @@
 
     <div class="section">
         <div class="section-item"
-            (click) = setReminder()
+            (click) = openNotification()
+
+            (contextmenu) = openNotification()
         >
             <img src="../../assets/images/taskDetail/alarmClock.svg" alt="it">
-            <span>Напомнить</span>
+            <span *ngIf="!myTask.reminderNote">Напомнить</span>
+            <span> {{ myTask.reminderNote | date: "MMM d, hh:mm:ss a"}} </span>
+
+            <div class="notificationMenu-container" *ngIf="notificationTurn">
+                <div class="notificationMenu-title">
+                    <span>Напоминание</span>
+                </div>
+
+                <div class="notificationMenu-items">
+                    <ul class="notificationMenu-items-list">
+                        <li class="notificationMenu-items-list__item"
+                            (click) = afterHour()
+                        >Позднее сегодня</li>
+                        <li class="notificationMenu-items-list__item"
+                            (click) = getTomorrow()
+                        >Завтра</li>
+                        <li class="notificationMenu-items-list__item"
+                            (click) = getNextWeek()
+                        >Следующая неделя</li>
+                        <!-- <li class="notificationMenu-items-list__item">Другая дата</li> -->
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="section-item">
+
+        <div class="section-item"
+            (click) = openDeadLineBlock()
+        >
             <img src="../../assets/images/taskDetail/calendar.svg" alt="it">
-            <span>Добавить дату выполнения</span>
+            <span *ngIf="!myTask.deadLine">Добавить дату выполнения</span>
+            <span *ngIf="myTask.deadLine"> Срок: {{ myTask.deadlineNote }} </span>
+            <div class="notificationMenu-container" *ngIf="deadLineTurn">
+
+                <div class="notificationMenu-title">
+                    <span>Срок</span>
+                </div>
+
+                <div class="notificationMenu-items">
+                    <ul class="notificationMenu-items-list">
+                        <li class="notificationMenu-items-list__item"
+                            (click) = setDeadlineToday()
+                        >сегодня</li>
+                        <li class="notificationMenu-items-list__item"
+                            (click) = setDeadlineTomorrow()
+                        >Завтра</li>
+                        <li class="notificationMenu-items-list__item"
+                            (click) = setDeadlineNextWeek()
+                        >Следующая неделя</li>
+                    </ul>
+                </div>
+
+            </div>
+
         </div>
+
         <div class="section-item">
             <img src="../../assets/images/taskDetail/repeat.svg" alt="it">
             <span>Повтор</span>
@@ -54,6 +105,11 @@
             <span>Выберите категорию</span>
         </div>
     </div>
+
+    <!-- <div class="section detailCategory-section"> -->
+        <textarea class="section">
+        </textarea>
+    <!-- </div> -->
 
     <div class="detailSectionFooter">
 

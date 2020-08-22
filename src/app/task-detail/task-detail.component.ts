@@ -10,8 +10,10 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 export class TaskDetailComponent implements OnInit {
 
   @Input() myTask: Task;
-  
-  
+  notificationTurn: boolean = false;
+  deadLineTurn: boolean = false;
+  time: Date;
+
   @ViewChild('input') input: ElementRef;
 
   constructor( private taskDetailService: OpenTaskDetailService) { 
@@ -33,12 +35,54 @@ export class TaskDetailComponent implements OnInit {
     console.log(this.myTask);
   }
 
-  setReminder() {
-    this.myTask.reminder = Date.now() + 1000;
-    let day = Date.now();
+  openNotification() {
+    if(this.deadLineTurn) {
+      this.deadLineTurn = false;
+    }
+
+    this.notificationTurn = !this.notificationTurn;
+  }
+  
+  afterHour() {
+    this.myTask.reminder = Date.now() + 3600000;
+    this.myTask.reminderNote = new Date(this.myTask.reminder);
   }
 
-  blur() {
-    console.log(this.myTask.reminder);
+  getTomorrow() {
+    const dayInMS = 86400000;
+    this.myTask.reminder = Date.now() + dayInMS;
+    this.myTask.reminderNote = new Date(this.myTask.reminder);
   }
+
+  getNextWeek() {
+    const weekInMS = 86400000 * 7;
+    this.myTask.reminder = Date.now() + weekInMS;
+    this.myTask.reminderNote = new Date(this.myTask.reminder);
+  }
+
+  openDeadLineBlock() {
+    if(this.notificationTurn) {
+      this.notificationTurn = false;
+    }
+
+    this.deadLineTurn = !this.deadLineTurn;
+  }
+
+  setDeadlineToday() {
+    this.myTask.deadLine = Date.now();
+    this.myTask.deadlineNote = 'сегодня';
+  }
+
+  setDeadlineTomorrow() {
+    const dayInMS = 86400000;
+    this.myTask.deadLine = Date.now() + dayInMS;
+    this.myTask.deadlineNote = 'завтра';
+  }
+
+  setDeadlineNextWeek() {
+    const weekInMS = 86400000 * 7;
+    this.myTask.deadLine = Date.now() + weekInMS;
+    this.myTask.deadlineNote = 'следющая неделя';
+  }
+
 }

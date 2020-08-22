@@ -5,4 +5,8 @@ export class Task {
     looked?: string;
     complited?: boolean | false;
     timing?: Date;
+    reminder?: number;
+    reminderNote?: Date;
+    deadLine?: number;
+    deadlineNote?: string;
 }
